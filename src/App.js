@@ -34,18 +34,6 @@ class App extends Component {
     });
   };
 
-  // renderButton = (label, sortType, onClick, sortCondition) => {
-  //   return (
-  //     <Button
-  //       className={`btn-outline-primary ${sortType === sortCondition ? 'btn-styled' : ''}`}
-  //       label={label}
-  //       onClick={() => {
-  //         onClick(sortCondition);
-  //       }}
-  //     />
-  //   );
-  // };
-
   onPostSelect = postId => {
     this.setState({
       selectedPostId: postId
@@ -57,7 +45,7 @@ class App extends Component {
     return (
       <SortingContext.Consumer>
         {sortConfig => {
-          const { sortType, onSortingChange, posts, addPost } = sortConfig;
+          const { posts, addPost } = sortConfig;
 
           const { selectedPostId } = this.state;
           const neededIndex = posts.findIndex(

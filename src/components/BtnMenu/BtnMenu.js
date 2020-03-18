@@ -11,7 +11,6 @@ export const BtnMenu = props => {
     const {selectedSortType, options, onSortingChange} = props;
     const [isOpenChange, setIsOpenChange] = useState(false);
 
-
     const onLabelClick = e => {
         onSortingChange(e.target.id);
         toggleMenu(); // close menu after selection
