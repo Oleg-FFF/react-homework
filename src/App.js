@@ -10,6 +10,7 @@ import {Form} from './components/Form/Form';
 import {Input} from './components/Input/Input';
 import SortingOptionsPanel from "./components/SortingOptionsPanel/SortingOptionsPanel";
 import './App.scss';
+import AddUserForm from './components/AddUserForm/AddUserForm';
 
 class App extends Component {
     constructor(props) {
@@ -17,7 +18,8 @@ class App extends Component {
         this.state = {
             inputValue: '',
             selectedPostId: allPosts[0].id,
-            isPostHidden: false
+            isPostHidden: false,
+            usersList: []
         };
     }
 
@@ -39,6 +41,13 @@ class App extends Component {
             selectedPostId: postId
         });
     };
+  addUser = (newUser) => {
+    const { usersList } = this.state;
+
+    this.setState({
+      usersList: [...usersList, newUser]
+    })
+  };
 
     render() {
         console.log(this.selectedPostId);
@@ -92,6 +101,15 @@ class App extends Component {
                                             />
                                             <p>{this.state.inputValue}</p>
                                         </div>
+
+                                        <div>
+                                            {
+                                                this.state.usersList.map((user) => {
+                                                    return <div key={user.id}>{`${user.name} ${user.lastName}`}</div>
+                                                })
+                                            }
+                                        </div>
+                                        <AddUserForm addUser={this.addUser}/>
 
                                         <UserContext.Consumer>
                                             {({user}) => (

@@ -13,28 +13,23 @@ export class Form extends Component {
       text: '',
       id: uniqId()
     };
+
   }
 
-  static getDerivedStateFromProps(nextProps, prevState) {
-    if (nextProps.post.id !== prevState.id) {
-      return {
-        id: nextProps.post.id,
-        text: nextProps.post.text,
-        title: nextProps.post.title
-      };
-    }
-    return null;
-  }
+  onLabelChange = (event) => {
+    const { id } = event.target;
 
-  onLabelChange = e => {
-    const { id } = e.target;
+    console.log(event.target.value);
+
     this.setState({
-      [id]: e.target.value
+      [id]: event.target.value
     });
   };
 
+
   onSubmit = () => {
     const { user, addPost } = this.props;
+
     const newPost = {
       ...this.state,
       data: new Date(),

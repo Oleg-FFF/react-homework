@@ -1,6 +1,6 @@
 import React from "react";
 import { AppConfigContext, UserContext } from "../../context";
-import UserInfo from "../UserInfo /UserInfo";
+import UserInfo from "../UserInfo/UserInfo";
 import "./Header.scss";
 
 const Header = () => {
