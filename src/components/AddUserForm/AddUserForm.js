@@ -47,6 +47,10 @@ class AddUserForm extends Component {
     this.userLastNameRef.current.value = "";
   };
 
+  onReset = () => {
+    // todo: имплементнуть функцию скидывания значений, введеных пользователем
+  };
+
   onAlternativeSubmit = (event) => {
     event.preventDefault();
     const { addUser } = this.props;
@@ -92,6 +96,11 @@ class AddUserForm extends Component {
         {/* todo: можете добавить иконку с восклицательным знаком, чтоб привлечь внимание пользователя */}
         {/* todo: под ошибкой имеется ввиду, что пользователь не ввел данные в инпуты и нажал submit */}
         <Button type="submit" className="btn-outline-secondary" label="Add post" />
+
+        {/* ToDo: добавить кнопку для скидывания введеных пользователем значений */}
+        {/* ToDo: на кнопке должно быть написано Reset */}
+        {/* ToDo: в onClick кнопки прокинуть метод класса onReset (объявлен в строке 51) */}
+
       </form>
     );
   }
