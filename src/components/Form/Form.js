@@ -26,6 +26,9 @@ export class Form extends Component {
     });
   };
 
+  onReset = () => {
+    // todo: имплементнуть функцию скидывания значений, введеных пользователем
+  };
 
   onSubmit = () => {
     const { user, addPost } = this.props;
@@ -71,7 +74,16 @@ export class Form extends Component {
             value={this.state.text}
           />
         </div>
-        <Button className="btn-outline-secondary" onClick={this.onSubmit} label="Add post"/>
+        {/* ToDo: добавить кнопку для скидывания введеных пользователем значений */}
+        {/* ToDo: на кнопке должно быть написано Reset */}
+        {/* ToDo: в onClick кнопки прокинуть метод класса onReset (объявлен в строке 29) */}
+
+        {/* ToDo: прокинуть в строке 86 пропсу isDisabled которая равна true если в стейте пустые строки для title и text */}
+        <Button
+          className="btn-outline-secondary"
+          onClick={this.onSubmit}
+          label="Add post"
+        />
       </div>
     );
   }
