@@ -12,10 +12,6 @@ class AddUserForm extends Component {
         // this.userNameRef = createRef(); // аналогично записи в строке 19
         // this.userLastNameRef = createRef();
 
-        // this.setState({
-        //     currentError: ''
-        // })
-
       this.state = {
         currentError: ''
       }
