@@ -36,6 +36,17 @@ class App extends Component {
     });
   };
 
+  renderButton = (label, sortType, onClick, sortCondition) => {
+    return (
+      <Button
+        className={`btn-outline-primary ${sortType === sortCondition ? 'btn-styled' : ''}`}
+        label={label}
+        onClick={() => {
+          onClick(sortCondition);
+        }}
+      />
+    );
+  };
   onPostSelect = postId => {
     this.setState({
       selectedPostId: postId
@@ -61,7 +72,25 @@ class App extends Component {
                     <Header/>
 
                     {/* todo: перенести этот JSX в файл components/SortingOptionsPanel/SortingOptionsPanel.js */}
-
+                    <div className="sorting-options d-flex justify-items-center align-items-center">
+                      <label className="custom-label">Sorting options:</label>
+                      <BtnMenu
+                        options={Object.keys(sortingTypes)}
+                        onSortingChange={onSortingChange}
+                      />
+                      {this.renderButton(
+                        'Sort by author',
+                        sortType,
+                        onSortingChange,
+                        sortingTypes.BY_AUTHOR
+                      )}
+                      {this.renderButton(
+                        'Sort by date',
+                        sortType,
+                        onSortingChange,
+                        sortingTypes.BY_DATE
+                      )}
+                    </div>
                     {/* todo: перенести этот JSX в файл components/SortingOptionsPanel/SortingOptionsPanel.js (конец)*/}
 
                     {/* todo: проверить что импорт и использование SortingOptionsPanel не ламает функционала*/}
@@ -73,7 +102,7 @@ class App extends Component {
                         <Button label="HIDE POST!" onClick={this.hidePost}/>
                         {/* todo: добавить в props PostsList пропертю selectedPostId */}
                         {/* todo: в selectedPostId  положить selectedPostId из стейта (объявлено в строке 61) */}
-                        <PostsList posts={posts} selectedPostId={selectedPostId} onPostSelect={this.onPostSelect}/>
+                        <PostsList posts={posts} onPostSelect={this.onPostSelect}/>
                       </div>
                       <ErrorBoundary>
                         {!this.state.isPostHidden &&
