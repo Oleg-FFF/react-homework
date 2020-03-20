@@ -9,12 +9,10 @@ const CN = 'user-form';
 class AddUserForm extends Component {
     constructor(props) {
         super(props);
-        // this.userNameRef = createRef(); // аналогично записи в строке 19
-        // this.userLastNameRef = createRef();
 
         this.state = {
             currentError: ''
-        }
+        };
     }
 
     // todo: добавить state, в него добавить пропертю, которая будет отображать есть ли ошибка или нет.
@@ -26,7 +24,10 @@ class AddUserForm extends Component {
     userLastNameRef = createRef();
 
     onInputChange = (e) => {
-        console.log(e.target.value)
+
+        if (e.target.value) {
+            this.setState({currentError: ''});
+        }
         // todo: если в стейте была записана какая-то ошибка - зачищаем ее при изменении инпута
         //  поскольку в ситуации если пользователь ничего - не ввел - увидел ошибку - понял, что не так - начал вводить данные
         //  было бы хорошо не пугать его висящим сообщением, что все таки что-то не так
@@ -35,15 +36,16 @@ class AddUserForm extends Component {
     onSubmit = (e) => {
         e.preventDefault();
 
-        // if (this.userNameRef.current.value === true) {
-        //   this.setState = ({currentError:<div className='warning'>
-        //         <div>
-        //             <h2>WARNING!!! WRITE SOMETHING!!!</h2>
-        //             <img src={ImgWarning} alt="Warning"/>
-        //         </div>
-        //     </div>})
-        // }
-        console.log('submitted')
+        if (this.userNameRef.current.value === '' && this.userLastNameRef.current.value === '') {
+            this.setState({
+                currentError: <div className='warning'>
+                    <div>
+                        <h2>WARNING!!! WRITE SOMETHING!!!</h2>
+                        <img src={ImgWarning} alt="Warning"/>
+                    </div>
+                </div>
+            });
+        }
 
         // Todo: добавить здесь проверку, если пользователь НЕ ВВЕЛ в инпуты ничего - не создаем пост
         //  и обновляем currentError в стейте, кладем сообщение, что пошло не так
@@ -112,13 +114,6 @@ class AddUserForm extends Component {
                 </div>
 
                 {this.state.currentError}
-
-                {/*<div className='warning'>*/}
-                {/*    <div>*/}
-                {/*        <h2>WARNING!!! WRITE SOMETHING!!!</h2>*/}
-                {/*        <img src={ImgWarning} alt="Warning"/>*/}
-                {/*    </div>*/}
-                {/*</div>*/}
 
                 {/* todo: Добавить здесь <div> сообщение об ошибке, если такая произошла */}
                 {/* todo: стилизуйте это сообщение об ошибке, чтоб текст был красным и броским */}

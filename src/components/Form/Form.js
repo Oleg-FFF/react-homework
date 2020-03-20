@@ -55,7 +55,7 @@ export class Form extends Component {
     };
 
     render() {
-      return (
+        return (
             <div className={CN}>
                 <h2>Create new Post</h2>
                 <div className="form-group">
@@ -80,19 +80,19 @@ export class Form extends Component {
                     />
                 </div>
                 <Button className="btn-outline-secondary" label="Reset"
-                        onClick={this.onReset} isDisable = {!this.state.text.trim() && !this.state.title.trim()}
+                        onClick={this.onReset} isDisable={!this.state.text.trim() && !this.state.title.trim()}
                 />
 
-              {/* ToDo: добавить кнопку для скидывания введеных пользователем значений */}
+                {/* ToDo: добавить кнопку для скидывания введеных пользователем значений */}
                 {/* ToDo: на кнопке должно бы'true'ть написано Reset */}
                 {/* ToDo: в onClick кнопки прокинуть метод класса onReset (объявлен в строке 29) */}
 
                 {/* ToDo: прокинуть в строке 86 пропсу isDisabled которая равна true если в стейте пустые строки для title и text */}
-              <Button
+                <Button
                     className="btn-outline-secondary"
                     onClick={this.onSubmit}
                     label="Add post"
-                    isDisable = {!this.state.text.trim() && !this.state.title.trim()}
+                    isDisable={!this.state.text.trim() && !this.state.title.trim()}
                 />
             </div>
         );
