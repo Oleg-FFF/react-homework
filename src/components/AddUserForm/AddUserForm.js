@@ -12,9 +12,9 @@ class AddUserForm extends Component {
         // this.userNameRef = createRef(); // аналогично записи в строке 19
         // this.userLastNameRef = createRef();
 
-      this.state = {
-        currentError: ''
-      }
+        this.state = {
+            currentError: ''
+        }
     }
 
     // todo: добавить state, в него добавить пропертю, которая будет отображать есть ли ошибка или нет.
@@ -35,9 +35,16 @@ class AddUserForm extends Component {
     onSubmit = (e) => {
         e.preventDefault();
 
-        if (this.userNameRef.current.value === false && this.userLastNameRef.current.value === false) {
-          this.setState.currentError = "что пошло не так"
-        }
+        // if (this.userNameRef.current.value === true) {
+        //   this.setState = ({currentError:<div className='warning'>
+        //         <div>
+        //             <h2>WARNING!!! WRITE SOMETHING!!!</h2>
+        //             <img src={ImgWarning} alt="Warning"/>
+        //         </div>
+        //     </div>})
+        // }
+        console.log('submited')
+
         // Todo: добавить здесь проверку, если пользователь НЕ ВВЕЛ в инпуты ничего - не создаем пост
         //  и обновляем currentError в стейте, кладем сообщение, что пошло не так
         //  если пользователь ввел данные - создаем постзадачу
@@ -63,28 +70,28 @@ class AddUserForm extends Component {
         // todo: имплементнуть функцию скидывания значений, введеных пользователем
     };
 
-    onAlternativeSubmit = (event) => {
-        event.preventDefault();
-        const {addUser} = this.props;
-
-        const formData = new FormData(event.target);
-        debugger
-        const user = {
-            name: formData.get('userName'),
-            lastName: formData.get('userLastName'),
-            id: uniqId()
-        };
-        addUser(user);
-
-        console.log(user)
-    };
+    // onAlternativeSubmit = (event) => {
+    //     event.preventDefault();
+    //     const {addUser} = this.props;
+    //
+    //     const formData = new FormData(event.target);
+    //     debugger
+    //     const user = {
+    //         name: formData.get('userName'),
+    //         lastName: formData.get('userLastName'),
+    //         id: uniqId()
+    //     };
+    //     addUser(user);
+    //
+    //     console.log(user)
+    // };
 
     render() {
         return (
             <form className={CN} onSubmit={this.onSubmit}>
                 <h2>Create new User</h2>
                 <div className="form-group">
-                    <label htmlFor="title" className="input-group-text">Enter post title:</label>
+                    <label htmlFor="title" className="input-group-text">Enter user name:</label>
                     <input
                         ref={this.userNameRef}
                         className="form-control"
@@ -94,7 +101,7 @@ class AddUserForm extends Component {
                     />
                 </div>
                 <div className="form-group">
-                    <label htmlFor="text" className="input-group-text">Enter post text:</label>
+                    <label htmlFor="text" className="input-group-text">Enter user last name:</label>
                     <input
                         ref={this.userLastNameRef}
                         className="form-control"
@@ -104,12 +111,15 @@ class AddUserForm extends Component {
                     />
                 </div>
 
-                <div className='warning'>
-                    <div>
-                        <h2>WARNING!!! WRITE SOMETHING!!!</h2>
-                        <img src={ImgWarning} alt="Warning"/>
-                    </div>
-                </div>
+                {this.state.currentError}
+
+                {/*<div className='warning'>*/}
+                {/*    <div>*/}
+                {/*        <h2>WARNING!!! WRITE SOMETHING!!!</h2>*/}
+                {/*        <img src={ImgWarning} alt="Warning"/>*/}
+                {/*    </div>*/}
+                {/*</div>*/}
+
                 {/* todo: Добавить здесь <div> сообщение об ошибке, если такая произошла */}
                 {/* todo: стилизуйте это сообщение об ошибке, чтоб текст был красным и броским */}
                 {/* todo: можете добавить иконку с восклицательным знаком, чтоб привлечь внимание пользователя */}

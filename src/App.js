@@ -41,13 +41,14 @@ class App extends Component {
             selectedPostId: postId
         });
     };
-  addUser = (newUser) => {
-    const { usersList } = this.state;
 
-    this.setState({
-      usersList: [...usersList, newUser]
-    })
-  };
+    addUser = (newUser) => {
+        const {usersList} = this.state;
+
+        this.setState({
+            usersList: [...usersList, newUser]
+        })
+    };
 
     render() {
         console.log(this.selectedPostId);
@@ -109,6 +110,7 @@ class App extends Component {
                                                 })
                                             }
                                         </div>
+
                                         <AddUserForm addUser={this.addUser}/>
 
                                         <UserContext.Consumer>
