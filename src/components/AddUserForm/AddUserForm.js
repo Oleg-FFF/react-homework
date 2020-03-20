@@ -43,7 +43,7 @@ class AddUserForm extends Component {
         //         </div>
         //     </div>})
         // }
-        console.log('submited')
+        console.log('submitted')
 
         // Todo: добавить здесь проверку, если пользователь НЕ ВВЕЛ в инпуты ничего - не создаем пост
         //  и обновляем currentError в стейте, кладем сообщение, что пошло не так
