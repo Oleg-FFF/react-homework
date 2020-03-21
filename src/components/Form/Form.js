@@ -13,26 +13,28 @@ export class Form extends Component {
       text: '',
       id: uniqId()
     };
-
   }
 
-  onLabelChange = (event) => {
-    const { id } = event.target;
+  static getDerivedStateFromProps(nextProps, prevState) {
+    if (nextProps.post.id !== prevState.id) {
+      return {
+        id: nextProps.post.id,
+        text: nextProps.post.text,
+        title: nextProps.post.title
+      };
+    }
+    return null;
+  }
 
-    console.log(event.target.value);
-
+  onLabelChange = e => {
+    const { id } = e.target;
     this.setState({
-      [id]: event.target.value
+      [id]: e.target.value
     });
-  };
-
-  onReset = () => {
-    // todo: имплементнуть функцию скидывания значений, введеных пользователем
   };
 
   onSubmit = () => {
     const { user, addPost } = this.props;
-
     const newPost = {
       ...this.state,
       data: new Date(),
@@ -74,16 +76,7 @@ export class Form extends Component {
             value={this.state.text}
           />
         </div>
-        {/* ToDo: добавить кнопку для скидывания введеных пользователем значений */}
-        {/* ToDo: на кнопке должно быть написано Reset */}
-        {/* ToDo: в onClick кнопки прокинуть метод класса onReset (объявлен в строке 29) */}
-
-        {/* ToDo: прокинуть в строке 86 пропсу isDisabled которая равна true если в стейте пустые строки для title и text */}
-        <Button
-          className="btn-outline-secondary"
-          onClick={this.onSubmit}
-          label="Add post"
-        />
+        <Button className="btn-outline-secondary" onClick={this.onSubmit} label="Add post"/>
       </div>
     );
   }
