@@ -53,6 +53,7 @@ class App extends Component {
                     const neededIndex = posts.findIndex(
                         item => item.id === selectedPostId
                     );
+
                     return (
                         <ThemeContext.Consumer>
                             {value => {
@@ -105,6 +106,7 @@ class App extends Component {
                                                 posts.map((post) => {
                                                     return (
                                                         <Post post={post} key={post.id}/>
+                                                        console.log('11')
                                                     );
                                                 })
                                             }
