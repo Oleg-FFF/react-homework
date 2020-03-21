@@ -9,7 +9,8 @@ export const Button = props => {
         onClick,
         label = "Click me", // дефолтное значение = "Click me"
         className = "btn-primary",
-        isDisable = false
+        isDisable = false,
+        title = ''
         // todo добавить пропсу isDisabled, значение которой по умолчанию должно быть false
     } = props;
 
@@ -26,6 +27,7 @@ export const Button = props => {
             onClick={onClickHandler}
             type={type}
             disabled={isDisable}
+            title={title}
         >
             {label}
         </button>
