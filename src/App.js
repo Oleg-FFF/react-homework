@@ -4,7 +4,7 @@ import { Button } from './components/Button/Button';
 import { allPosts, sortingTypes } from './constants';
 import { SortingContext, ThemeContext, UserContext } from './context';
 import Header from './components/Header/Header';
-import { BtnMenu } from './components/BtnMenu/BtnMenu';
+// import { BtnMenu } from './components/BtnMenu/BtnMenu';
 import { PostsList } from './components/PostsList/PostsList';
 import ErrorBoundary from './components/ErrorBoundary/ErrorBoundary';
 import { Form } from './components/Form/Form';
@@ -36,17 +36,6 @@ class App extends Component {
     });
   };
 
-  renderButton = (label, sortType, onClick, sortCondition) => {
-    return (
-      <Button
-        className={`btn-outline-primary ${sortType === sortCondition ? 'btn-styled' : ''}`}
-        label={label}
-        onClick={() => {
-          onClick(sortCondition);
-        }}
-      />
-    );
-  };
   onPostSelect = postId => {
     this.setState({
       selectedPostId: postId
@@ -57,7 +46,7 @@ class App extends Component {
     return (
       <SortingContext.Consumer>
         {sortConfig => {
-          const { sortType, onSortingChange, posts, addPost } = sortConfig;
+          const { posts, addPost } = sortConfig;
 
           const { selectedPostId } = this.state;
           const neededIndex = posts.findIndex(
@@ -70,39 +59,11 @@ class App extends Component {
                 return (
                   <div className={`App ${value}`}>
                     <Header/>
-
-                    {/* todo: перенести этот JSX в файл components/SortingOptionsPanel/SortingOptionsPanel.js */}
-                    <div className="sorting-options d-flex justify-items-center align-items-center">
-                      <label className="custom-label">Sorting options:</label>
-                      <BtnMenu
-                        options={Object.keys(sortingTypes)}
-                        onSortingChange={onSortingChange}
-                      />
-                      {this.renderButton(
-                        'Sort by author',
-                        sortType,
-                        onSortingChange,
-                        sortingTypes.BY_AUTHOR
-                      )}
-                      {this.renderButton(
-                        'Sort by date',
-                        sortType,
-                        onSortingChange,
-                        sortingTypes.BY_DATE
-                      )}
-                    </div>
-                    {/* todo: перенести этот JSX в файл components/SortingOptionsPanel/SortingOptionsPanel.js (конец)*/}
-
-                    {/* todo: проверить что импорт и использование SortingOptionsPanel не ламает функционала*/}
                     <SortingOptionsPanel/>
-                    {/* todo: проверить что импорт и использование SortingOptionsPanel не ламает функционала */}
-
                     <div className="d-flex">
                       <div>
                         <Button label="HIDE POST!" onClick={this.hidePost}/>
-                        {/* todo: добавить в props PostsList пропертю selectedPostId */}
-                        {/* todo: в selectedPostId  положить selectedPostId из стейта (объявлено в строке 61) */}
-                        <PostsList posts={posts} onPostSelect={this.onPostSelect}/>
+                        <PostsList selectedPostId={selectedPostId} posts={posts} onPostSelect={this.onPostSelect}/>
                       </div>
                       <ErrorBoundary>
                         {!this.state.isPostHidden &&
