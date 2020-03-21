@@ -104,7 +104,6 @@ class App extends Component {
                                         <div className="all-posts">
                                             {
                                                 posts.map((post) => {
-                                                    console.log('wwww');
                                                     return (
                                                         <Post post={post} key={post.id}/>
 
