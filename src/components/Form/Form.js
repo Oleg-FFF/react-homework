@@ -83,14 +83,14 @@ export class Form extends Component {
                 </div>
 
                 <Button
-                    className={`btn-outline-secondary ${!this.state.titleInput && !this.state.text && 'myTooltip'}`}
+                    className={`btn-outline-secondary ${!this.state.titleInput.trim() && !this.state.text.trim() && 'myTooltip'}`}
                     onClick={this.onSubmit}
                     label="Add post"
                     isDisable={!this.state.text.trim() && !this.state.titleInput.trim()}
                 />
 
                 <Button
-                    className={`btn-outline-secondary ${!this.state.titleInput && !this.state.text && 'myTooltip'}`}
+                    className={`btn-outline-secondary ${!this.state.titleInput.trim() && !this.state.text.trim() && 'myTooltip'}`}
                     onClick={this.onReset}
                     label="Reset"
                     isDisable={!this.state.text.trim() && !this.state.titleInput.trim()}
