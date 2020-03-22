@@ -61,6 +61,7 @@ class App extends Component {
                     const neededIndex = posts.findIndex(
                         item => item.id === selectedPostId
                     );
+
                     return (
                         <ThemeContext.Consumer>
                             {value => {
