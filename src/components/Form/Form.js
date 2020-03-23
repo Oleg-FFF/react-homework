@@ -14,13 +14,10 @@ export class Form extends Component {
             text: '',
             id: uniqId()
         };
-
     }
 
     onLabelChange = (event) => {
-        const {id} = event.target;
-
-        console.log(event.target.value);
+        const {id} = event.target; //help to add value of attribute from input
 
         this.setState({
             [id]: event.target.value
