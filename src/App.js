@@ -80,39 +80,11 @@ class App extends Component {
                 return (
                   <div className={`App ${value}`}>
                     <Header/>
-
-                    {/* todo: перенести этот JSX в файл components/SortingOptionsPanel/SortingOptionsPanel.js */}
-                    <div className="sorting-options d-flex justify-items-center align-items-center">
-                      <label className="custom-label">Sorting options:</label>
-                      <BtnMenu
-                        options={Object.keys(sortingTypes)}
-                        onSortingChange={onSortingChange}
-                      />
-                      {this.renderButton(
-                        'Sort by author',
-                        sortType,
-                        onSortingChange,
-                        sortingTypes.BY_AUTHOR
-                      )}
-                      {this.renderButton(
-                        'Sort by date',
-                        sortType,
-                        onSortingChange,
-                        sortingTypes.BY_DATE
-                      )}
-                    </div>
-                    {/* todo: перенести этот JSX в файл components/SortingOptionsPanel/SortingOptionsPanel.js (конец)*/}
-
-                    {/* todo: проверить что импорт и использование SortingOptionsPanel не ламает функционала*/}
                     <SortingOptionsPanel/>
-                    {/* todo: проверить что импорт и использование SortingOptionsPanel не ламает функционала */}
-
                     <div className="d-flex">
                       <div>
                         <Button label="HIDE POST!" onClick={this.hidePost}/>
-                        {/* todo: добавить в props PostsList пропертю selectedPostId */}
-                        {/* todo: в selectedPostId  положить selectedPostId из стейта (объявлено в строке 61) */}
-                        <PostsList posts={posts} onPostSelect={this.onPostSelect}/>
+                        <PostsList selectedPostId={selectedPostId} posts={posts} onPostSelect={this.onPostSelect}/>
                       </div>
                       <ErrorBoundary>
                         {!this.state.isPostHidden &&
