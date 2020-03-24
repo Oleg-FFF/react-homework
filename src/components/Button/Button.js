@@ -8,7 +8,9 @@ export const Button = props => {
     type = "button", // дефолтное значение = 'button'
     onClick,
     label = "Click me", // дефолтное значение = "Click me"
-    className = "btn-primary"
+    className = "btn-primary",
+    isDisabled = false,
+    title = ''
     // todo добавить пропсу isDisabled, значение которой по умолчанию должно быть false
   } = props;
 
@@ -20,10 +22,12 @@ export const Button = props => {
   //   после 26 строки добавить кнопке атрибут disabled который равен значению пропсы isDisabled
   return (
     <button
-      className={`${CN} btn add-margin ${className}`}
+      className={`${CN} btn add-margin ${className} ${isDisabled===true ? 'disabled' : ''}`}
       id={id}
       onClick={onClickHandler}
       type={type}
+      disabled={isDisabled}
+      title={title}
     >
       {label}
     </button>

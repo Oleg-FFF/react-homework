@@ -1,7 +1,7 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import uniqId from 'uniqid';
 import './Form.scss';
-import { Button } from '../Button/Button';
+import {Button} from '../Button/Button';
 
 const CN = 'custom-form';
 
@@ -17,7 +17,7 @@ export class Form extends Component {
   }
 
   onLabelChange = (event) => {
-    const { id } = event.target;
+    const {id} = event.target;
 
     console.log(event.target.value);
 
@@ -27,11 +27,15 @@ export class Form extends Component {
   };
 
   onReset = () => {
+    this.setState({
+      title: '',
+      text: ''
+    })
     // todo: имплементнуть функцию скидывания значений, введеных пользователем
   };
 
   onSubmit = () => {
-    const { user, addPost } = this.props;
+    const {user, addPost} = this.props;
 
     const newPost = {
       ...this.state,
@@ -49,12 +53,23 @@ export class Form extends Component {
     });
   };
 
+  onTooltipHandler = () => {
+    if (this.state.text.trim() === "" && this.state.title.trim() === "") {
+      return 'Please, write your title and text';
+    } else if (this.state.text.trim() === "") {
+      return 'Please, write your text';
+    } else if (this.state.title.trim() === "") {
+      return 'Please, write your title'
+    }
+    return ""
+  };
+
   render() {
     return (
       <div className={CN}>
         <h2>Create new Post</h2>
         <div className="form-group">
-          <label for="title" className="input-group-text">Enter post title:</label>
+          <label htmlFor="title" className="input-group-text">Enter post title:</label>
           <input
             className="form-control"
             type="text"
@@ -64,7 +79,7 @@ export class Form extends Component {
           />
         </div>
         <div className="form-group">
-          <label for="text" className="input-group-text">Enter post text:</label>
+          <label htmlFor="text" className="input-group-text">Enter post text:</label>
           <input
             className="form-control"
             name="text-input"
@@ -73,6 +88,12 @@ export class Form extends Component {
             onChange={this.onLabelChange}
             value={this.state.text}
           />
+        </div>
+        <div>
+          <button
+            onClick={this.onReset}
+          >Reset
+          </button>
         </div>
         {/* ToDo: добавить кнопку для скидывания введеных пользователем значений */}
         {/* ToDo: на кнопке должно быть написано Reset */}
@@ -83,8 +104,11 @@ export class Form extends Component {
           className="btn-outline-secondary"
           onClick={this.onSubmit}
           label="Add post"
+          isDisabled={this.state.text.trim() === "" && this.state.title.trim() === ""}
+          title={this.onTooltipHandler()}
         />
       </div>
     );
-  }
+  };
 }
+
