@@ -53,20 +53,26 @@ export const allPosts = [
 export const allLinks = {
   admin: [
     {
-      label: 'home'
+      label: 'home',
+      to: '/home'
     }, {
-      label: 'posts'
+      label: 'posts',
+      to: '/posts'
     }, {
-      label: 'users'
+      label: 'users',
+      to: '/users'
     }, {
-      label: 'settings'
+      label: 'post preview',
+      to: '/post-preview'
     }
   ],
   user: [
     {
-      label: 'home'
+      label: 'home',
+      to: '/home'
     }, {
-      label: 'posts'
+      label: 'posts',
+      to: '/posts'
     }
   ]
 };

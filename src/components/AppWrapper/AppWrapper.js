@@ -1,11 +1,23 @@
-import React, { useState } from "react";
+import React, { useState } from 'react';
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link
+} from 'react-router-dom';
 import {
   AppConfigContext,
   SortingContext,
   ThemeContext,
   UserContext
-} from "../../context";
-import { allLinks, allPosts, sortingTypes, user } from "../../constants";
+} from '../../context';
+import Header from '../../components/Header/Header';
+import App from '../../App';
+import { PostsPage } from '../../containers/PostsPage/PostsPage';
+import { allLinks, allPosts, sortingTypes, user } from '../../constants';
+import { PostDetailsPage } from '../../containers/PostDetailsPage/PostDetailsPage';
+import NotFound from '../../containers/NotFound/NotFound';
+import { UsersPage } from '../../containers/UsersPage/UsersPage';
 
 export function AppWrapper(props) {
   const [sortType, setSortType] = useState(sortingTypes.BY_DEFAULT);
@@ -13,7 +25,7 @@ export function AppWrapper(props) {
   const [posts, setPosts] = useState(allPosts);
 
   const toggleUserRole = () => {
-    setUserRole(userRole === "admin" ? "user" : "admin");
+    setUserRole(userRole === 'admin' ? 'user' : 'admin');
   };
 
   const addPost = newPost => {
@@ -35,7 +47,7 @@ export function AppWrapper(props) {
   };
 
   const sortByAuthor = () => {
-    const sorted = [...posts].sort(function(a, b) {
+    const sorted = [...posts].sort(function (a, b) {
       if (a.authorName > b.authorName) {
         return 1;
       }
@@ -64,7 +76,7 @@ export function AppWrapper(props) {
           toggleUserRole
         }}
       >
-        <ThemeContext.Provider value={"light"}>
+        <ThemeContext.Provider value={'light'}>
           <SortingContext.Provider
             value={{
               sortType,
@@ -73,7 +85,31 @@ export function AppWrapper(props) {
               addPost
             }}
           >
-            {props.children}
+            <Router>
+              <Header/>
+
+              <Switch>
+                <Route exact path="/">
+                  <App/>
+                </Route>
+                <Route exact path="/home">
+                  <App/>
+                </Route>
+
+                {/* чтоб иметь доступ к history, match, location PostPage обвернут в withRouter */}
+                <Route exact path="/posts">
+                  <PostsPage/>
+                </Route>
+                {/* прокидываются history, match, location  автоматом в пропсы*/}
+                <Route exact path="/users" component={UsersPage}/>
+
+                {/* в props лежат history, match, location */}
+                <Route path="/posts/:id" render={(props) => <PostDetailsPage {...props}/>} />
+
+                <Route path="*" component={NotFound}/>
+              </Switch>
+
+            </Router>
           </SortingContext.Provider>
         </ThemeContext.Provider>
       </UserContext.Provider>
