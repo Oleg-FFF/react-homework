@@ -22,5 +22,4 @@ const mapDispatchToProps = (dispatch) => {
   };
 };
 
-
 export const PostsPage = withRouter(connect(mapStateToProps, mapDispatchToProps)(PostsPageComponent));
