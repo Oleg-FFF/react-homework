@@ -4,15 +4,15 @@ import { BtnMenu } from '../../components/BtnMenu/BtnMenu';
 import { sortingTypes } from '../../constants';
 import { Button } from '../../components/Button/Button';
 import { Post } from '../../components/Post/Post';
-
+import './PostsPage.scss';
 const CN = 'posts-page';
 
 export class PostsPage extends Component {
 
   onSelectPost = (id) => {
-    const { history, match: {url} } = this.props;
+    const { history, match: { url } } = this.props;
 
-    history.push(`${url}/${id}`)
+    history.push(`${url}/${id}`);
   };
 
   renderButton = (label, sortType, onClick, sortCondition) => {
@@ -27,24 +27,26 @@ export class PostsPage extends Component {
     );
   };
 
-  renderSortingPanel = (onSortingChange, sortType) => {
+  renderSortingPanel = () => {
+    const { postsConfig: { sortType }, actions: {sortBy}} = this.props;
+
     return (
       <div className="sorting-options d-flex justify-items-center align-items-center">
         <label className="custom-label">Sorting options:</label>
         <BtnMenu
           options={Object.keys(sortingTypes)}
-          onSortingChange={onSortingChange}
+          onSortingChange={sortBy}
         />
         {this.renderButton(
           'Sort by author',
           sortType,
-          onSortingChange,
+          sortBy,
           sortingTypes.BY_AUTHOR
         )}
         {this.renderButton(
           'Sort by date',
           sortType,
-          onSortingChange,
+          sortBy,
           sortingTypes.BY_DATE
         )}
       </div>
@@ -52,30 +54,26 @@ export class PostsPage extends Component {
   };
 
   render() {
-    console.log('Posts props', this.props)
+    console.log('Posts page props', this.props);
+    // const { postsConfig: { sortType, onSortingChange, posts, addPost } = this.props;
+    const { postsConfig: { posts }} = this.props;
+
     return (
-      <SortingContext.Consumer>
-        {sortConfig => {
-          const { sortType, onSortingChange, posts, addPost } = sortConfig;
+      <div className={CN}>
+        {this.renderSortingPanel()}
 
-          return (
-            <div className={CN}>
-              {this.renderSortingPanel(onSortingChange, sortType)}
-
-              <div className="all-posts">
-                {
-                  posts.map((post) => {
-                    return (
-                      <Post post={post} key={post.id} onSelect={this.onSelectPost}/>
-                    );
-                  })
-                }
-              </div>
-            </div>
-          );
-        }
-        }
-      </SortingContext.Consumer>
+        <div className="all-posts">
+          {
+            posts.map((post) => {
+              return (
+                <Post post={post} key={post.id} onSelect={this.onSelectPost}/>
+              );
+            })
+          }
+        </div>
+      </div>
     );
+
+
   }
 }

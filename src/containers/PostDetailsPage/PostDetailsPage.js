@@ -10,12 +10,10 @@ import { ErrorBoundary } from '../../components/ErrorBoundary/ErrorBoundary';
 import './PostDetailsPage.scss';
 
 const CN = 'post-page';
-export const PostPageComponent = (props) => {
-  const { match: { id }, history } = props;
-
+export const PostDetailsPage = (props) => {
   // чтоб доступится к id и history, если не использовать withRouter то можно юзнуть хуки, поскольку это функциональная компонента
-  // let { id } = useParams();
-  // let history = useHistory();
+  let { id } = useParams();
+  let history = useHistory();
 
   // пример использования объекта history
   const goBack = () => {
@@ -29,14 +27,18 @@ export const PostPageComponent = (props) => {
 
         const post = posts.find(item => item.id === id);
 
+        if (!post) return history.push('/not-found');
+
         return (
           <div className={CN}>
             <div className='back-btn' onClick={goBack}>{'<'} Back</div>
 
-            <Post post={post}/>
+            <ErrorBoundary>
+              <Post post={post}/>
+            </ErrorBoundary>
 
-            {post && <Post post={post}/>}
-            {!post && <div> No post found For current id {id}</div>}
+            {/*{post && <Post post={post}/>}*/}
+            {/*{!post && <div> No post found For current id {id}</div>}*/}
           </div>
         );
       }
@@ -44,6 +46,3 @@ export const PostPageComponent = (props) => {
     </SortingContext.Consumer>
   );
 };
-
-
-export const PostDetailsPage = withRouter(PostPageComponent);
