@@ -8,35 +8,37 @@ const initialState = {
 };
 
 export const postsReducer = (state = initialState, action) => {
-  const { currentCounter } = state;
-
   switch (action.type) {
     case SORT_BY: {
       const { payload: sortType } = action;
+      let newArray = [];
+      const copy = cloneDeep(state.posts);
 
-      let newArray = cloneDeep(state.posts);
       debugger
       switch (sortType) {
         case sortingTypes.BY_DATE:
-          newArray = sortByDate(newArray);
+          newArray = sortByDate(copy);
           break;
         case sortingTypes.BY_AUTHOR:
-          newArray = sortByAuthor(newArray);
+          newArray = sortByAuthor(copy);
           break;
-        default: break;
+        default:
+          newArray = initialState.posts;
+          break;
       }
+
       return {
         sortType,
         posts: newArray
       };
     }
     default:
-      return state
+      return state;
   }
 };
 
 const sortByAuthor = (array) => {
-  const result = [...array].sort(function (a, b) {
+ return array.sort(function (a, b) {
     if (a.authorName > b.authorName) {
       return 1;
     }
@@ -45,10 +47,8 @@ const sortByAuthor = (array) => {
     }
     return 0;
   });
-  return result;
 };
 
 const sortByDate = (array) => {
-  const result = [...array].sort((a, b) => new Date(a.data) - new Date(b.data));
-  return result;
+  return array.sort((a, b) => new Date(a.data) - new Date(b.data));
 };

@@ -14,35 +14,26 @@ export const PostDetailsPage = (props) => {
   // чтоб доступится к id и history, если не использовать withRouter то можно юзнуть хуки, поскольку это функциональная компонента
   let { id } = useParams();
   let history = useHistory();
+  const { postsConfig: { posts } } = props;
 
   // пример использования объекта history
   const goBack = () => {
     history.goBack();
   };
+  const post = posts.find(item => item.id === id);
+
+  if (!post) return history.push('/not-found');
 
   return (
-    <SortingContext.Consumer>
-      {sortConfig => {
-        const { posts } = sortConfig;
+    <div className={CN}>
+      <div className='back-btn' onClick={goBack}>{'<'} Back</div>
 
-        const post = posts.find(item => item.id === id);
+      <ErrorBoundary>
+        <Post post={post}/>
+      </ErrorBoundary>
 
-        if (!post) return history.push('/not-found');
-
-        return (
-          <div className={CN}>
-            <div className='back-btn' onClick={goBack}>{'<'} Back</div>
-
-            <ErrorBoundary>
-              <Post post={post}/>
-            </ErrorBoundary>
-
-            {/*{post && <Post post={post}/>}*/}
-            {/*{!post && <div> No post found For current id {id}</div>}*/}
-          </div>
-        );
-      }
-      }
-    </SortingContext.Consumer>
+      {/*{post && <Post post={post}/>}*/}
+      {/*{!post && <div> No post found For current id {id}</div>}*/}
+    </div>
   );
 };

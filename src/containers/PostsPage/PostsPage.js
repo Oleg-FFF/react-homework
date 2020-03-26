@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { SortingContext } from '../../context';
 import { BtnMenu } from '../../components/BtnMenu/BtnMenu';
 import { sortingTypes } from '../../constants';
 import { Button } from '../../components/Button/Button';

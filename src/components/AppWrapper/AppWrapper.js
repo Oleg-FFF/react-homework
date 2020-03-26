@@ -10,7 +10,6 @@ import { Provider } from 'react-redux';
 import { store } from '../../store';
 import {
   AppConfigContext,
-  SortingContext,
   ThemeContext,
   UserContext
 } from '../../context';
@@ -18,7 +17,7 @@ import Header from '../../components/Header/Header';
 import { App } from '../../containers/HomePage';
 import { PostsPage } from '../../containers/PostsPage';
 import { allLinks, allPosts, sortingTypes, user } from '../../constants';
-import { PostDetailsPage } from '../../containers/PostDetailsPage/PostDetailsPage';
+import { PostDetailsPage } from '../../containers/PostDetailsPage';
 import NotFound from '../../containers/NotFound/NotFound';
 import { UsersPage } from '../../containers/UsersPage/UsersPage';
 
