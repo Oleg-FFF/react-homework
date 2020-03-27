@@ -1,8 +1,8 @@
 import React, {Component, createRef} from 'react';
 import uniqId from 'uniqid';
 import {Button} from '../Button/Button';
-import './AddUserForm.scss';
 import ImgWarning from './../../assets/icon-attention-png-clip-art.png'
+import './AddUserForm.scss';
 
 const CN = 'user-form';
 
@@ -29,24 +29,31 @@ class AddUserForm extends Component {
 
     onInputChange = (e) => {
 
-        if (e.target.value) {
-            this.setState({
-                currentError: ''
-            })
-        }
+        // if (e.target.value) {
+        //     this.setState({
+        //         currentError: ''
+        //     })
+        //     console.log('target')
+        // }
 
-        if (this.userNameRef.current.value) {
+        if (this.userNameRef.current.value.trim()) {
             this.setState({
                 inputErrorName: '',
-                errorInputName: ''
-            })
+                errorInputName: '',
+                currentError: ''
+
+            });
+            console.log('userNameRef')
         }
 
-        if (this.userLastNameRef.current.value) {
+        if (this.userLastNameRef.current.value.trim()) {
             this.setState({
                 inputErrorLastName: '',
-                errorInputLastName: ''
-            })
+                errorInputLastName: '',
+                currentError: ''
+
+            });
+            console.log('userLastNameRef')
         }
 
         // todo: если в стейте была записана какая-то ошибка - зачищаем ее при изменении инпута
@@ -57,28 +64,25 @@ class AddUserForm extends Component {
     onSubmit = (e) => {
         e.preventDefault();
 
-        if (this.userNameRef.current.value.trim() === '' && this.userLastNameRef.current.value.trim() === '') {
+        const userNameValue = this.userNameRef.current.value;
+        const userLastNameValue = this.userLastNameRef.current.value;
+
+        if (userNameValue.trim() === '' && userLastNameValue.trim() === '') {
             this.setState({
-                currentError:
-                    <div className='warning'>
-                        <div>
-                            <h2>WARNING!!! WRITE SOMETHING!!!</h2>
-                            <img src={ImgWarning} alt="Warning"/>
-                        </div>
-                    </div>,
+                currentError: 'WARNING!!! WRITE SOMETHING!!!'
+
             });
         }
 
-        if (!this.userNameRef.current.value.trim()) {
+        if (!userNameValue.trim()) {
 
             this.setState({
                 inputErrorName: 'second-form-control',
                 errorInputName: 'This input is empty! Write something!'
-
             })
         }
 
-        if (!this.userLastNameRef.current.value.trim()) {
+        if (!userLastNameValue.trim()) {
 
             this.setState({
                 inputErrorLastName: 'second-form-control',
@@ -93,19 +97,17 @@ class AddUserForm extends Component {
         const {addUser} = this.props;
 
         const user = {
-            name: this.userNameRef.current.value,
-            lastName: this.userLastNameRef.current.value,
+            name: userNameValue,
+            lastName: userLastNameValue,
             id: uniqId()
         };
 
         addUser(user);
 
-        this.userNameRef.current.value = "";
-        this.userLastNameRef.current.value = "";
+        this.onReset()
     };
 
     onReset = () => {
-
         this.userNameRef.current.value = "";
         this.userLastNameRef.current.value = "";
         // todo: имплементнуть функцию скидывания значений, введеных пользователем
@@ -128,6 +130,9 @@ class AddUserForm extends Component {
     // };
 
     render() {
+        console.log(this.userNameRef)
+        const {currentError} = this.state;
+
         return (
             <form className={CN} onSubmit={this.onSubmit}>
                 <h2>Create new User</h2>
@@ -158,7 +163,14 @@ class AddUserForm extends Component {
                     </div>
                 </div>
 
-                {this.state.currentError}
+                {!!currentError && (
+                    <div className='warning'>
+                        <div>
+                            <h2>{currentError}</h2>
+                            <img src={ImgWarning} alt="Warning"/>
+                        </div>
+                    </div>)
+                }
 
                 {/* todo: Добавить здесь <div> сообщение об ошибке, если такая произошла */}
                 {/* todo: стилизуйте это сообщение об ошибке, чтоб текст был красным и броским */}

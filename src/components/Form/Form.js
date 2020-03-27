@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import uniqId from 'uniqid';
-import './Form.scss';
 import {Button} from '../Button/Button';
+import './Form.scss';
 
 const CN = 'custom-form';
 
@@ -22,6 +22,9 @@ export class Form extends Component {
         this.setState({
             [id]: event.target.value
         });
+
+        console.log(this.props.children)
+
     };
 
     onReset = () => {
@@ -53,6 +56,7 @@ export class Form extends Component {
     };
 
     render() {
+        const {text, titleInput} = this.state;
         return (
             <div className={CN}>
                 <h2>Create new Post</h2>
@@ -63,7 +67,7 @@ export class Form extends Component {
                         type="text"
                         id="titleInput"
                         onChange={this.onLabelChange}
-                        value={this.state.titleInput}
+                        value={titleInput}
                     />
                 </div>
 
@@ -75,22 +79,22 @@ export class Form extends Component {
                         type="text"
                         id="text"
                         onChange={this.onLabelChange}
-                        value={this.state.text}
+                        value={text}
                     />
                 </div>
 
                 <Button
-                    className={`btn-outline-secondary ${!this.state.titleInput.trim() && !this.state.text.trim() && 'myTooltip'}`}
+                    className={`btn-outline-secondary ${!titleInput.trim() && !text.trim() && 'myTooltip'}`}
                     onClick={this.onSubmit}
                     label="Add post"
-                    isDisable={!this.state.text.trim() && !this.state.titleInput.trim()}
+                    isDisable={!text.trim() && !titleInput.trim()}
                 />
 
                 <Button
-                    className={`btn-outline-secondary ${!this.state.titleInput.trim() && !this.state.text.trim() && 'myTooltip'}`}
+                    className={`btn-outline-secondary ${!titleInput.trim() && !text.trim() && 'myTooltip'}`}
                     onClick={this.onReset}
                     label="Reset"
-                    isDisable={!this.state.text.trim() && !this.state.titleInput.trim()}
+                    isDisable={!text.trim() && !titleInput.trim()}
                 />
 
                 {/* ToDo: добавить кнопку для скидывания введеных пользователем значений */}

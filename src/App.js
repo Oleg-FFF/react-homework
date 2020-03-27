@@ -9,8 +9,8 @@ import ErrorBoundary from './components/ErrorBoundary/ErrorBoundary';
 import {Form} from './components/Form/Form';
 import {Input} from './components/Input/Input';
 import SortingOptionsPanel from "./components/SortingOptionsPanel/SortingOptionsPanel";
-import './App.scss';
 import AddUserForm from './components/AddUserForm/AddUserForm';
+import './App.scss';
 
 class App extends Component {
     constructor(props) {
