@@ -52,16 +52,15 @@ class App extends Component {
   };
 
   render() {
-    const { postsConfig } = this.props;
-    debugger
+    const { postsConfig } = this.props; // todo достать из props actions: {createPost}
     const { posts } = postsConfig;
+
     const { selectedPostId } = this.state;
     const neededIndex = posts.findIndex(item => item.id === selectedPostId);
 
     return (
       <ThemeContext.Consumer>
         {value => {
-          console.log(value); // достаем значение темы из контекста и используем ниже в className
           return (
             <div className={`App ${value}`}>
               <div className="d-flex">
@@ -90,7 +89,7 @@ class App extends Component {
               <UserContext.Consumer>
                 {({ user }) => (
                   <Form
-                    // addPost={addPost}
+                    // addPost={addPost}  // todo использовать тут вместо {addPost} нашу созданую функцию createPost
                     user={user}
                     post={posts[neededIndex]}
                   />

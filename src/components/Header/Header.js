@@ -24,7 +24,7 @@ export const Header = (props) => {
                   ))}
               </ul>
 
-              <div className="d-flex justify-content-between counter">
+              <div className="d-flex justify-content-between counter align-items-center">
                 <div className="badge-info">Counter: {counter}</div>
                 <button className="btn-outline-info btn-sm " onClick={increment}>+</button>
                 <button className="btn-sm btn-outline-info" onClick={decrement}>-</button>

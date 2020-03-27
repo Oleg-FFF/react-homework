@@ -1,5 +1,7 @@
 import cloneDeep from 'lodash/cloneDeep';
 import { allPosts, sortingTypes } from '../constants';
+
+// todo импортнуть ниже ваш новы тип экшена CREATE_POST
 import { SORT_BY } from '../action-types';
 
 const initialState = {
@@ -13,8 +15,7 @@ export const postsReducer = (state = initialState, action) => {
       const { payload: sortType } = action;
       let newArray = [];
       const copy = cloneDeep(state.posts);
-
-      debugger
+      
       switch (sortType) {
         case sortingTypes.BY_DATE:
           newArray = sortByDate(copy);
@@ -32,6 +33,12 @@ export const postsReducer = (state = initialState, action) => {
         posts: newArray
       };
     }
+    // todo раскоментировать и имплементнуть редюсер к этому экшн типу
+    //    нужно копировать state.posts и добавить к копии новый элемент, который лежит в action.payload
+    //    вернуть копию стейта с подмененным массивом posts
+    // case CREATE_POST: {
+    //
+    // }
     default:
       return state;
   }
