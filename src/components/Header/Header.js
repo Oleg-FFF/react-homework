@@ -7,7 +7,8 @@ import { AppConfigContext, UserContext } from "../../context";
 import UserInfo from "../UserInfo/UserInfo";
 import "./Header.scss";
 
-const Header = () => {
+export const Header = (props) => {
+  const { counter, actions: { increment, decrement } } = props;
   return (
     <AppConfigContext.Consumer>
       {allLinks => (
@@ -22,6 +23,12 @@ const Header = () => {
                     <NavLink to={link.to} key={link.label} activeClassName="active-link">{link.label}</NavLink>
                   ))}
               </ul>
+
+              <div className="d-flex justify-content-between counter">
+                <div className="badge-info">Counter: {counter}</div>
+                <button className="btn-outline-info btn-sm " onClick={increment}>+</button>
+                <button className="btn-sm btn-outline-info" onClick={decrement}>-</button>
+              </div>
               <UserInfo />
             </div>
           )}
@@ -30,5 +37,3 @@ const Header = () => {
     </AppConfigContext.Consumer>
   );
 };
-
-export default Header;

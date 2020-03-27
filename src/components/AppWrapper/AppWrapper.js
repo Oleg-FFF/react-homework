@@ -13,7 +13,7 @@ import {
   ThemeContext,
   UserContext
 } from '../../context';
-import Header from '../../components/Header/Header';
+import { Header } from '../../components/Header';
 import { App } from '../../containers/HomePage';
 import { PostsPage } from '../../containers/PostsPage';
 import { allLinks, allPosts, sortingTypes, user } from '../../constants';
@@ -27,11 +27,9 @@ export function AppWrapper(props) {
   const toggleUserRole = () => {
     setUserRole(userRole === 'admin' ? 'user' : 'admin');
   };
-
   // const addPost = newPost => {
   //   setPosts([...posts, newPost]);
   // };
-
   return (
     <Provider store={store}>
       <AppConfigContext.Provider value={allLinks}>

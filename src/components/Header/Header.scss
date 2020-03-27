@@ -10,6 +10,23 @@
     color: darkred;
   }
 
+  .counter {
+    height: 20px;
+    width: 250px;
+    font-size: 12px;
+
+    .btn-sm {
+      padding: 0 10px;
+      text-align: center;
+      vertical-align: center;
+    }
+
+    .badge-info {
+      border-radius: 5px;
+      padding: 0 10px;
+    }
+  }
+
   ul {
     padding: 0;
     width: 100%;
