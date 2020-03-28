@@ -1,0 +1,43 @@
+.App {
+  text-align: center;
+
+  .all-posts {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .input-example {
+    width: 300px;
+    margin: 10px auto;
+    padding: 10px;
+  }
+
+  &-logo {
+    height: 40vmin;
+    pointer-events: none;
+  }
+
+  &-link {
+    color: #61dafb;
+  }
+
+  .custom-label {
+    margin: 0 -30px 0 20px;
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    &-logo {
+      animation: App-logo-spin infinite 20s linear;
+    }
+
+    &-logo-spin {
+      from {
+        transform: rotate(0deg);
+      }
+
+      to {
+        transform: rotate(360deg);
+      }
+    }
+  }
+}
