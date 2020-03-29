@@ -97,9 +97,7 @@ export function AppWrapper(props) {
                 </Route>
 
                 {/* чтоб иметь доступ к history, match, location PostPage обвернут в withRouter */}
-                <Route exact path="/posts">
-                  <PostsPage/>
-                </Route>
+                <Route exact path="/posts" component={PostsPage}/>
                 {/* прокидываются history, match, location  автоматом в пропсы*/}
                 <Route exact path="/users" component={UsersPage}/>
 
